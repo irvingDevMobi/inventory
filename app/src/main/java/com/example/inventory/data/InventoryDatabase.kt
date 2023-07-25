@@ -10,17 +10,17 @@ import androidx.room.RoomDatabase
     version = 1,
     exportSchema = false
 )
-abstract class InventoryDataBase: RoomDatabase() {
+abstract class InventoryDatabase: RoomDatabase() {
 
     abstract fun itemDao(): ItemDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: InventoryDataBase? = null
+        private var INSTANCE: InventoryDatabase? = null
 
-        fun getDatabase(context: Context): InventoryDataBase = INSTANCE ?: synchronized(this) {
-            Room.databaseBuilder(context, InventoryDataBase::class.java, "item_database")
+        fun getDatabase(context: Context): InventoryDatabase = INSTANCE ?: synchronized(this) {
+            Room.databaseBuilder(context, InventoryDatabase::class.java, "item_database")
                 .fallbackToDestructiveMigration()
                 .build()
                 .also {
